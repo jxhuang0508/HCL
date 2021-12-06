@@ -66,7 +66,7 @@ HCL/data/Cityscapes/gtFine/val
 ```
 
 ### Pre-trained models
-Pre-trained models can be downloaded [here](XXX) and put in ```HCL/pretrained_models```
+Pre-trained models can be downloaded [here](https://github.com/jxhuang0508/HCL/releases/tag/model) and put ```GTA5_HCL_source.pth``` into ```HCL/pretrained_models/HCL_source_only_426```, ```GTA5_HCL_target.pth``` into ```HCL/pretrained_models/HCL_target_482```. 
 
 ### Evaluation
 
