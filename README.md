@@ -71,12 +71,14 @@ Pre-trained models can be downloaded [here](https://github.com/jxhuang0508/HCL/r
 ### Training
 To train GTA5_HCL_source:
 ```bash
+conda activate hcl
 cd HCL/hcl/scripts
 python train.py --cfg configs/hcl_source.yml
 ```
 
 To evaluate trained GTA5_HCL_source:
 ```bash
+conda activate hcl
 cd HCL/hcl/scripts
 python test.py --cfg configs/hcl_source.yml
 ```
@@ -104,6 +106,7 @@ cd HCL/hcl_target
 
 To evaluate GTA5_HCL_source.pth:
 ```bash
+conda activate hcl
 cd HCL/hcl/scripts
 python test.py --cfg ./configs/hcl_source_pretrained.yml
 ```
