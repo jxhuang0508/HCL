@@ -114,8 +114,12 @@ cd HCL/hcl_target
 python evaluate_cityscapes_advent_best.py --restore-from ../../pretrained_models/GTA5_HCL_target.pth
 ```
 
-## Acknowledgements
-This codebase is heavily borrowed from [ADVENT](https://github.com/valeoai/ADVENT) and [CRST](https://github.com/yzou2/CRST).
+ ## Related Works
+ We also would like to thank great works as follows:
+ - https://github.com/valeoai/ADVENT
+ - https://github.com/layumi/Seg-Uncertainty
+ - https://github.com/yzou2/CRST
+
 
 ## Contact
 If you have any questions, please contact: jiaxing.huang@ntu.edu.sg
