@@ -106,8 +106,6 @@ class MLP2d(nn.Module):
         return x
 
 
-# def Proj_Head(in_dim=2048, inner_dim=4096, out_dim=256):
-#     return MLP2d(in_dim, inner_dim, out_dim)
 def Proj_Head(in_dim=1024, inner_dim=2048, out_dim=128):
     return MLP2d(in_dim, inner_dim, out_dim)
 
