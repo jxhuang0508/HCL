@@ -70,10 +70,10 @@ Pre-trained models can be downloaded [here](https://github.com/jxhuang0508/HCL/r
 
 ### Evaluation
 
-To evaluate RDA_FAA_T:
+To evaluate GTA5_HCL_source.pth:
 ```bash
-cd RDA/CRST
-python evaluate_advent.py --test-flipping --data-dir ../RDA/data/Cityscapes --restore-from ../RDA/pretrained_models/model_FAA_T.pth --save ../RDA/experiments/GTA2Cityscapes_RDA
+cd HCL/hcl/script
+python test.py --cfg ./configs/hcl_source_pretrained.yml
 ```
 
 To evaluate RDA_FAA_S_T:
