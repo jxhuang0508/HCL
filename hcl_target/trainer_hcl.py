@@ -209,16 +209,7 @@ class AD_Trainer(nn.Module):
             kl_distance = nn.KLDivLoss( reduction = 'none')
             loss = criterion(pred1, labels)
 
-            #n, h, w = labels.shape
-            #labels_onehot = torch.zeros(n, self.num_classes, h, w)
-            #labels_onehot = labels_onehot.cuda()
-            #labels_onehot.scatter_(1, labels.view(n,1,h,w), 1)
-
-            # variance = torch.sum(kl_distance(self.log_sm(pred1),self.sm(pred2)), dim=1)
-            # hcl
-            # variance = torch.sum(kl_distance(self.log_sm(pred1),self.sm(pred1_ma)), dim=1)
             variance = torch.sum(kl_distance(self.log_sm(pred1_ma),self.sm(pred1_source)), dim=1)
-
             exp_variance = torch.exp(-variance)
             #variance = torch.log( 1 + (torch.mean((pred1-pred2)**2, dim=1)))
             #torch.mean( kl_distance(self.log_sm(pred1),pred2), dim=1) + 1e-6
@@ -288,8 +279,6 @@ class AD_Trainer(nn.Module):
             loss_seg2 = self.update_consistency_his(label_label_aug1, pred2, pred1, pred2_ma, pred1_ma, pred2_source, pred1_source)
             loss_fea1 = self.update_contrast_his(label_label_aug1, feature_1, labels, feature_1_ma, pred1_ma)
             print(loss_fea1)
-            print('update contrast--------------------------------------------------------------------------------')
-            # loss_fea2 = self.update_contrast(label_label_aug1, feature_2, labels, feature_2_ma, pred2_ma)
  
             loss = loss_seg2 + self.lambda_seg * loss_seg1 + self.lambda_seg * loss_fea1
 
