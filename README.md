@@ -46,6 +46,11 @@ https://github.com/jxhuang0508/HCL.git
 pip install -e ./HCL
 ```
 
+4. Install environment:
+```bash
+conda env create -f hcl_target.yml
+```
+
 ### Prepare Dataset
 * **GTA5**: Please follow the instructions [here](https://download.visinf.tu-darmstadt.de/data/from_games/) to download images and semantic segmentation annotations. The GTA5 dataset directory should have this basic structure:
 ```bash
@@ -85,10 +90,12 @@ python test.py --cfg configs/hcl_source.yml
 
 To train GTA5_HCL_target:
 ```bash
+conda activate hcl_target
 cd HCL/hcl_target
 python generate_plabel_cityscapes_advent.py  --restore-from ../../pretrained_models/GTA5_HCL_source.pth
 ```
 ```bash
+conda activate hcl_target
 python train_ft_advent_hcl.py --snapshot-dir ./snapshots/HCL_target \
 --restore-from ../../pretrained_models/GTA5_HCL_source.pth \
 --drop 0.2 --warm-up 5000 --batch-size 9 --learning-rate 1e-4 --crop-size 512,256 --lambda-seg 0.5 --lambda-adv-target1 0 \
@@ -98,6 +105,7 @@ python train_ft_advent_hcl.py --snapshot-dir ./snapshots/HCL_target \
 
 To evaluate trained GTA5_HCL_target:
 ```bash
+conda activate hcl_target
 cd HCL/hcl_target
 ./test.sh
 ```
@@ -113,6 +121,7 @@ python test.py --cfg ./configs/hcl_source_pretrained.yml
 
 To evaluate GTA5_HCL_target.pth:
 ```bash
+conda activate hcl_target
 cd HCL/hcl_target
 python evaluate_cityscapes_advent_best.py --restore-from ../../pretrained_models/GTA5_HCL_target.pth
 ```
