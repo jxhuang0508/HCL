@@ -122,10 +122,7 @@ class cityscapes_pseudo_DataSet(data.Dataset):
                 tmp_label_label_aug1 = label_label_aug1[x1:x1+self.h, y1:y1+self.w]
                 tmp_image_aug1 = image_aug1[:, x1:x1+self.h, y1:y1+self.w]
 
-                # x_center = int(math.floor((x1 + self.h / 2) / image_aug1.shape[1] * self.resize_size[1]))
-                # y_center = int(math.floor((y1 + self.w / 2) / image_aug1.shape[2] * self.resize_size[0]))
-                # tmp_label_copy = label_copy[(x_center - int(self.h/2)):(x_center + int(self.h/2)), (y_center - int(self.w/2)):(y_center + int(self.w/2))]
-                # tmp_image = image[:, (x_center - int(self.h/2)):(x_center + int(self.h/2)), (y_center - int(self.w/2)):(y_center + int(self.w/2))]
+                
                 x1_not_scale = math.floor(x1 * ((self.resize_size[1] -  self.h) / (image_aug1.shape[1] - self.h)))
                 y1_not_scale = math.floor(y1 * ((self.resize_size[0] -  self.w) / (image_aug1.shape[2] - self.w)))
                 tmp_label_copy = label_copy[x1_not_scale:x1_not_scale+self.h, y1_not_scale:y1_not_scale+self.w]
