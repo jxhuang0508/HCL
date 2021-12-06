@@ -68,31 +68,50 @@ HCL/data/Cityscapes/gtFine/val
 ### Pre-trained models
 Pre-trained models can be downloaded [here](https://github.com/jxhuang0508/HCL/releases/tag/model) and put ```GTA5_HCL_source.pth``` into ```HCL/pretrained_models/HCL_source_only_426```, ```GTA5_HCL_target.pth``` into ```HCL/pretrained_models/HCL_target_482```. 
 
-### Evaluation
+### Training
+To train GTA5_HCL_source:
+```bash
+cd HCL/hcl/scripts
+python train.py --cfg configs/hcl_source.yml
+```
+
+To evaluate trained GTA5_HCL_source:
+```bash
+cd HCL/hcl/scripts
+python test.py --cfg configs/hcl_source.yml
+```
+
+To train GTA5_HCL_target:
+```bash
+cd HCL/hcl_target
+python generate_plabel_cityscapes_advent.py  --restore-from ../../pretrained_models/GTA5_HCL_source.pth
+```
+```bash
+python train_ft_advent_hcl.py --snapshot-dir ./snapshots/HCL_target \
+--restore-from ../../pretrained_models/GTA5_HCL_source.pth \
+--drop 0.2 --warm-up 5000 --batch-size 9 --learning-rate 1e-4 --crop-size 512,256 --lambda-seg 0.5 --lambda-adv-target1 0 \
+--lambda-adv-target2 0 --lambda-me-target 0 --lambda-kl-target 0 --norm-style gn --class-balance --only-hard-label 80 \
+--max-value 7 --gpu-ids 0,1,2 --often-balance  --use-se  --input-size 1280,640  --train_bn  --autoaug False --save-pred-every 300
+```
+
+To evaluate trained GTA5_HCL_target:
+```bash
+cd HCL/hcl_target
+./test.sh
+```
+
+### Evaluation over Pretrained models
 
 To evaluate GTA5_HCL_source.pth:
 ```bash
-cd HCL/hcl/script
+cd HCL/hcl/scripts
 python test.py --cfg ./configs/hcl_source_pretrained.yml
 ```
 
-To evaluate RDA_FAA_S_T:
+To evaluate GTA5_HCL_target.pth:
 ```bash
-cd RDA/CRST
-python evaluate_advent.py --test-flipping --data-dir ../RDA/data/Cityscapes --restore-from ../RDA/pretrained_models/model_FAA_S_T.pth.pth --save ../RDA/experiments/GTA2Cityscapes_RDA
-```
-
-### Training
-To train RDA_FAA_T:
-```bash
-cd RDA/rda/scripts
-python train.py --cfg configs/RDA.yml
-```
-
-To test RDA_FAA_T:
-```bash
-cd RDA/CRST
-./test_best.sh
+cd HCL/hcl_target
+python evaluate_cityscapes_advent_best.py --restore-from ../../pretrained_models/GTA5_HCL_target.pth
 ```
 
 ## Acknowledgements
