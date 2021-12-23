@@ -128,7 +128,6 @@ class AD_Trainer(nn.Module):
         self.lambda_adv_target2 = args.lambda_adv_target2
         self.class_w = torch.FloatTensor(self.num_classes).zero_().cuda() + 1
         if args.fp16:
-            # Name the FP16_Optimizer instance to replace the existing optimizer
             assert torch.backends.cudnn.enabled, "fp16 mode requires cudnn backend to be enabled."
             self.G, self.gen_opt = amp.initialize(self.G, self.gen_opt, opt_level="O1")
             self.D1, self.dis1_opt = amp.initialize(self.D1, self.dis1_opt, opt_level="O1")
@@ -144,7 +143,7 @@ class AD_Trainer(nn.Module):
             n, h, w = labels.shape
             for i in range(self.num_classes):
                 count[i] = torch.sum(labels==i)
-                if count[i] < 64*64*n: #small objective
+                if count[i] < 64*64*n:
                     weight[i] = self.max_value
             if self.often_balance:
                 often[count == 0] = self.max_value
@@ -156,25 +155,18 @@ class AD_Trainer(nn.Module):
 
     def update_label(self, labels, prediction):
             criterion = nn.CrossEntropyLoss(weight = self.class_weight, ignore_index=255, reduction = 'none')
-            #criterion = self.seg_loss
             loss = criterion(prediction, labels)
             print('original loss: %f'% self.seg_loss(prediction, labels) )
-            #mm = torch.median(loss)
             loss_data = loss.data.cpu().numpy()
             mm = np.percentile(loss_data[:], self.only_hard_label)
-            #print(m.data.cpu(), mm)
             labels[loss < mm] = 255
             return labels
 
     def threshold_percent(self, labels, prediction):
             criterion = nn.CrossEntropyLoss(ignore_index=255, reduction = 'none')
-            #criterion = self.seg_loss
             loss = criterion(prediction, labels)
-            print('original loss: %f'% self.seg_loss(prediction, labels) )
-            #mm = torch.median(loss)
             loss_data = loss.data.cpu().numpy()
             thres_p = np.percentile(loss_data[:], self.threshold_t)
-            #print(m.data.cpu(), mm)
             labels[loss > thres_p] = 255
             return labels
 
@@ -184,20 +176,6 @@ class AD_Trainer(nn.Module):
             pred1, pred2 = self.G(images)
             pred1 = self.interp(pred1)
             pred2 = self.interp(pred2)
-
-            # if self.class_balance:
-            #     self.seg_loss = self.update_class_criterion(labels)
-            #
-            # if self.only_hard_label > 0:
-            #     labels1 = self.update_label(labels.clone(), pred1)
-            #     labels2 = self.update_label(labels.clone(), pred2)
-            #     loss_seg1 = self.seg_loss(pred1, labels1)
-            #     loss_seg2 = self.seg_loss(pred2, labels2)
-            # else:
-            #     loss_seg1 = self.seg_loss(pred1, labels)
-            #     loss_seg2 = self.seg_loss(pred2, labels)
-
-            # threshold
             labels1 = self.threshold_percent(labels.clone(), pred1)
             labels2 = self.threshold_percent(labels.clone(), pred2)
             loss_seg1 = self.seg_loss(pred1, labels1)
@@ -205,7 +183,6 @@ class AD_Trainer(nn.Module):
 
             loss = loss_seg2 + self.lambda_seg * loss_seg1
 
-            # target
             pred_target1, pred_target2 = self.G(images_t)
             pred_target1 = self.interp_target(pred_target1)
             pred_target2 = self.interp_target(pred_target2)
