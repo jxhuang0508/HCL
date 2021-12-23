@@ -172,11 +172,8 @@ class ResNetMulti(nn.Module):
             feature_1 = self.projector_1(x) # feature map
         else:
             x1 = None
-            # feature_1 = None
         x2 = self.layer4(x)
-        # feature_2 = self.projector_2(x2) # feature map
-        x2 = self.layer6(x2)  # produce segmap 2
-        # return x1, x2, feature_1, feature_2
+        x2 = self.layer6(x2)
         return x1, x2, feature_1
 
     def get_1x_lr_params_no_scale(self):
