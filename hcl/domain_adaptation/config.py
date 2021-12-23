@@ -118,9 +118,6 @@ cfg.TEST.WAIT_MODEL = True
 cfg.TRAIN.F_select = False
 cfg.TRAIN.F_component = [0, 1]
 
-# cfg.TEST.F_select = False
-# cfg.TEST.F_component = [0.0, 1.0]
-
 cfg.TEST.class_names_gta = ["road",
                             "sidewalk",
                             "building",
