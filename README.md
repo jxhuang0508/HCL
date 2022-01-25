@@ -5,7 +5,7 @@
 
 ## Paper
 ![](./teaser.png)
-[Model Adaptation: Historical Contrastive Learning for Unsupervised Domain Adaptation without Source Data](https://papers.nips.cc/paper/2021/file/1dba5eed8838571e1c80af145184e515-Paper.pdf)  
+[Model Adaptation: Historical Contrastive Learning for Unsupervised Domain Adaptation without Source Data](https://openreview.net/pdf?id=0zXJRJecC_)  
  [Jiaxing Huang](https://scholar.google.com/citations?user=czirNcwAAAAJ&hl=en&oi=ao), [Dayan Guan](https://scholar.google.com/citations?user=9jp9QAsAAAAJ&hl=en), [Xiao Aoran](https://scholar.google.com/citations?user=yGKsEpAAAAAJ&hl=en), [Shijian Lu](https://scholar.google.com/citations?user=uYmK-A0AAAAJ&hl=en)  
  School of Computer Science Engineering, Nanyang Technological University, Singapore  
  Thirty-fifth Conference on Neural Information Processing Systems.
