@@ -13,8 +13,9 @@ from torch.utils import data
 from advent.model.deeplabv2 import get_deeplab_v2
 from advent.dataset.gta5 import GTA5DataSet
 from advent.dataset.cityscapes import CityscapesDataSet
-from advent.domain_adaptation.config import cfg, cfg_from_file
-from advent.domain_adaptation.train_UDA import train_domain_adaptation
+
+from hcl.domain_adaptation.config import cfg, cfg_from_file
+from hcl.domain_adaptation.train_UDA import train_domain_adaptation
 
 warnings.filterwarnings("ignore", message="numpy.dtype size changed")
 warnings.filterwarnings("ignore")
