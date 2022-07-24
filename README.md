@@ -1,7 +1,10 @@
 # Model Adaptation: Historical Contrastive Learning for Unsupervised Domain Adaptation without Source Data
 
 ### Updates
-
+Fixed several bugs:
+1. Added the file ``HCL/hcl_target/model/deeplab_advent_no_p.py''.
+2. For files ``HCL/hcl_target/evaluate_cityscapes_advent.py'' and ``HCL/hcl_target/generate_plabel_cityscapes_advent.py'', changed ``from model.deeplab_advent import get_deeplab_v2'' into``from model.deeplab_advent_no_p import get_deeplab_v2''
+3. Changed the pre-trained models directories into ``../pretrained_models/HCL_source_only_426/GTA5_HCL_source.pth''
 
 ## Paper
 ![](./teaser.png)
