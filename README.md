@@ -93,7 +93,7 @@ To train GTA5_HCL_target:
 ```bash
 conda activate hcl_target
 cd HCL/hcl_target
-python generate_plabel_cityscapes_advent.py  --restore-from ../../pretrained_models/GTA5_HCL_source.pth
+python generate_plabel_cityscapes_advent.py  --restore-from ../pretrained_models/HCL_source_only_426/GTA5_HCL_source.pth
 ```
 ```bash
 conda activate hcl_target
