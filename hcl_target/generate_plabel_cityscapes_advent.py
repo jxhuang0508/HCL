@@ -13,7 +13,7 @@ import torch.nn.functional as F
 from torch.utils import data, model_zoo
 from model.deeplab import Res_Deeplab
 # from model.deeplab_multi import DeeplabMulti
-from model.deeplab_advent import get_deeplab_v2
+from model.deeplab_advent_no_p import get_deeplab_v2
 from model.deeplab_vgg import DeeplabVGG
 from dataset.cityscapes_dataset import cityscapesDataSet
 from collections import OrderedDict
